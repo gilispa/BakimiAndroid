@@ -1,0 +1,226 @@
+<resources>
+    <string name="app_name">Bakimi</string>
+    <string name="nav_inicio">Inicio</string>
+    <string name="nav_refri">Mi refri</string>
+    <string name="nav_semana">Mi semana</string>
+    <string name="nav_compras">Compras</string>
+
+    <!-- Ubicaciones -->
+    <string name="ubicacion_refrigerador">Refrigerador</string>
+    <string name="ubicacion_congelador">Congelador</string>
+    <string name="ubicacion_despensa">Despensa</string>
+
+    <!-- Unidades: %1$s es la cantidad ya formateada -->
+    <string name="cantidad_gramo">%1$s g</string>
+    <string name="cantidad_kilogramo">%1$s kg</string>
+    <string name="cantidad_mililitro">%1$s ml</string>
+    <string name="cantidad_litro">%1$s l</string>
+    <plurals name="cantidad_pieza">
+        <item quantity="one">%1$s pieza</item>
+        <item quantity="other">%1$s piezas</item>
+    </plurals>
+    <string name="unidad_gramo">g</string>
+    <string name="unidad_kilogramo">kg</string>
+    <string name="unidad_mililitro">ml</string>
+    <string name="unidad_litro">l</string>
+    <string name="unidad_pieza">piezas</string>
+
+    <!-- Mi refri: lista -->
+    <string name="refri_encabezado_grupo">%1$s · %2$d</string>
+    <string name="refri_agregar">Agregar</string>
+    <string name="refri_vacio_titulo">Tu refri está vacío</string>
+    <string name="refri_vacio_mensaje">Registra lo que tienes en casa: refrigerador, congelador y despensa. No tiene que ser exacto; puedes corregirlo después.</string>
+    <string name="refri_vacio_accion">Agregar alimento</string>
+    <string name="refri_agotado">Agotado</string>
+    <string name="refri_caduca">Caduca el %1$s</string>
+    <string name="refri_caducado">Caducó el %1$s</string>
+    <string name="refri_sumar">Sumar %1$s a %2$s</string>
+    <string name="refri_restar">Restar %1$s a %2$s</string>
+    <string name="refri_mas_opciones">Más opciones para %1$s</string>
+    <string name="refri_editar">Editar</string>
+    <string name="refri_marcar_agotado">Marcar como agotado</string>
+    <string name="refri_eliminar">Eliminar</string>
+    <string name="refri_eliminado">Eliminaste %1$s</string>
+    <string name="refri_deshacer">Deshacer</string>
+    <string name="refri_error_operacion">No se pudo guardar el cambio. Intenta de nuevo.</string>
+
+    <!-- Mi refri: formulario -->
+    <string name="form_titulo_agregar">Agregar alimento</string>
+    <string name="form_titulo_editar">Editar alimento</string>
+    <string name="form_volver">Volver</string>
+    <string name="form_buscar">¿Qué alimento es?</string>
+    <string name="form_buscar_ejemplo">Ej. jitomate, pollo, arroz</string>
+    <string name="form_buscar_ayuda">Escribe y elige de la lista.</string>
+    <string name="form_nombre_error">Busca y elige un alimento.</string>
+    <string name="form_agregar_otro">Agregar «%1$s» como otro alimento</string>
+    <string name="form_otro_explicacion">No está en la lista: se guardará en tu refri, pero no se usará para sugerirte recetas.</string>
+    <string name="form_fuera_catalogo">Fuera de la lista de alimentos</string>
+    <string name="form_cambiar">Cambiar</string>
+
+    <!-- Categorías de ingredientes -->
+    <string name="categoria_frutas_verduras">Frutas y verduras</string>
+    <string name="categoria_carnes">Carnes y pescados</string>
+    <string name="categoria_lacteos_huevo">Lácteos y huevo</string>
+    <string name="categoria_despensa">Despensa</string>
+    <string name="form_cantidad">Cantidad</string>
+    <string name="form_cantidad_ayuda">Si no sabes la cantidad exacta, usa una aproximación.</string>
+    <string name="form_cantidad_error">Escribe una cantidad válida, por ejemplo 1 o 0.5.</string>
+    <string name="form_unidad">Unidad</string>
+    <string name="form_ubicacion">¿Dónde lo guardas?</string>
+    <string name="form_caducidad">Caducidad (opcional)</string>
+    <string name="form_caducidad_agregar">Agregar fecha</string>
+    <string name="form_caducidad_quitar">Quitar fecha de caducidad</string>
+    <string name="form_guardar">Guardar</string>
+    <string name="form_aceptar">Aceptar</string>
+    <string name="form_cancelar">Cancelar</string>
+    <string name="form_error_guardar">No se pudo guardar. Intenta de nuevo.</string>
+
+    <!-- Recetas: disponibilidad -->
+    <string name="receta_lista">Puedes prepararla ahora</string>
+    <plurals name="receta_faltan">
+        <item quantity="one">Te falta %1$d ingrediente</item>
+        <item quantity="other">Te faltan %1$d ingredientes</item>
+    </plurals>
+    <string name="receta_minutos">%1$d min</string>
+    <string name="receta_minutos_accesible">%1$d minutos</string>
+    <string name="receta_credito_foto">Foto: %1$s en Unsplash</string>
+
+    <!-- Inicio -->
+    <string name="inicio_lema">Planea tus comidas. Aprovecha lo que tienes.</string>
+    <string name="inicio_destacadas">Para ti hoy</string>
+    <string name="inicio_puedes_cocinar">Puedes cocinar ahora</string>
+    <string name="inicio_faltan_pocos">Te faltan pocos ingredientes</string>
+    <string name="inicio_rapidas">Listo en menos de 20 minutos</string>
+    <string name="inicio_mas_ideas">Más ideas para ti</string>
+    <string name="inicio_refri_vacio_titulo">¿Qué tienes en casa?</string>
+    <string name="inicio_refri_vacio_mensaje">Registra tus alimentos en Mi refri y te mostraremos qué puedes cocinar con ellos.</string>
+    <string name="inicio_refri_vacio_accion">Ir a Mi refri</string>
+
+    <!-- Detalle de receta -->
+    <string name="detalle_porciones">Porciones</string>
+    <string name="detalle_menos_porciones">Una porción menos</string>
+    <string name="detalle_mas_porciones">Una porción más</string>
+    <string name="detalle_porciones_valor">%1$d porciones</string>
+    <string name="detalle_proteina">Proteína por porción</string>
+    <string name="detalle_proteina_valor">%1$s g aprox.</string>
+    <string name="detalle_sin_dato">Sin dato</string>
+    <string name="detalle_ingredientes">Ingredientes</string>
+    <string name="detalle_preparacion">Preparación</string>
+    <string name="detalle_paso">Paso %1$d</string>
+    <string name="detalle_paso_minutos">Unos %1$d min</string>
+    <string name="detalle_tienes">Tienes suficiente</string>
+    <string name="detalle_te_falta">Te falta %1$s</string>
+    <string name="detalle_tienes_aprox">Te alcanza: tienes aprox. %1$s</string>
+    <string name="detalle_te_falta_aprox">Te falta aprox. %1$s</string>
+    <string name="detalle_no_tienes">No lo tienes en Mi refri</string>
+    <string name="detalle_otra_unidad">Lo tienes en otra unidad; revisa si alcanza</string>
+    <string name="detalle_no_encontrada">No encontramos esta receta.</string>
+    <string name="detalle_agregar_semana">Agregar a mi semana</string>
+    <string name="detalle_en_semana">Está en tu semana (%1$d porciones)</string>
+    <string name="detalle_actualizar_semana">Guardar %1$d porciones en mi semana</string>
+    <string name="detalle_quitar_semana">Quitar de mi semana</string>
+    <string name="detalle_iniciar_cocina">Iniciar Modo Cocina</string>
+
+    <!-- Modo Cocina -->
+    <string name="cocina_salir">Salir del Modo Cocina</string>
+    <string name="cocina_progreso">Paso %1$d de %2$d</string>
+    <string name="cocina_imagen_paso">Imagen de referencia del paso %1$d</string>
+    <string name="cocina_anterior">Anterior</string>
+    <string name="cocina_siguiente">Siguiente</string>
+    <string name="cocina_termine">Terminé de cocinar</string>
+    <string name="cocina_ver_ingredientes">Ver ingredientes</string>
+    <string name="cocina_ingredientes_titulo">Ingredientes para %1$d porciones</string>
+    <string name="cocina_cerrar">Cerrar</string>
+    <string name="cocina_confirmar_titulo">¿Qué preparaste?</string>
+    <string name="cocina_confirmar_ayuda">Ajusta las porciones y lo que realmente usaste. Lo descontaremos de Mi refri.</string>
+    <string name="cocina_porciones_preparadas">Porciones que preparaste</string>
+    <string name="cocina_cantidad_usada">%1$s (%2$s)</string>
+    <string name="cocina_asi_quedara">Así quedará Mi refri</string>
+    <string name="cocina_cambio">%1$s: %2$s → %3$s</string>
+    <string name="cocina_sin_cambios">No hay nada que descontar.</string>
+    <string name="cocina_no_registrado">No estaba en tu refri: %1$s</string>
+    <string name="cocina_usaste_mas">Usaste más %1$s de lo registrado: %2$s. Quedará en 0.</string>
+    <string name="cocina_corregir_despues">Si tu refri no está al día, puedes corregirlo en Mi refri.</string>
+    <string name="cocina_aproximado">Algunas cantidades se calcularon con el peso aproximado por pieza.</string>
+    <string name="cocina_descontar">Descontar de mi refri</string>
+    <string name="cocina_volver_pasos">Volver a los pasos</string>
+    <string name="cocina_salir_sin_descontar">Salir sin descontar</string>
+    <string name="cocina_listo_titulo">¡Buen provecho!</string>
+    <string name="cocina_listo_mensaje">Actualizamos Mi refri con lo que usaste.</string>
+    <string name="cocina_ya_registrada">Esta preparación ya estaba registrada; no descontamos nada otra vez.</string>
+    <string name="cocina_volver_receta">Volver a la receta</string>
+    <string name="cocina_error">No se pudo actualizar Mi refri. Intenta de nuevo.</string>
+
+    <!-- Precios -->
+    <string name="precio">$%1$s</string>
+    <string name="precio_aprox">$%1$s aprox.</string>
+    <string name="precio_sin_dato">Sin precio</string>
+    <string name="precios_referencia">Precios de referencia aproximados (%1$s). El total en caja puede variar.</string>
+
+    <!-- Mi semana -->
+    <string name="semana_lema">Elige qué vas a comer; la lista de compras se arma sola.</string>
+    <string name="semana_personas">Personas</string>
+    <string name="semana_menos_personas">Una persona menos</string>
+    <string name="semana_mas_personas">Una persona más</string>
+    <string name="semana_presupuesto">Presupuesto para la compra (opcional)</string>
+    <string name="semana_presupuesto_ayuda">Lo que piensas gastar, sin contar lo que ya tienes en casa.</string>
+    <string name="semana_tu_semana">Tu semana</string>
+    <string name="semana_vacia">Todavía no eliges comidas. Agrega recetas de la lista de abajo.</string>
+    <string name="semana_menos_porciones">Una porción menos de %1$s</string>
+    <string name="semana_mas_porciones">Una porción más de %1$s</string>
+    <string name="semana_quitar">Quitar %1$s de mi semana</string>
+    <string name="semana_aprovecha">Aprovecha lo que vas a comprar</string>
+    <string name="semana_usa">Usa: %1$s</string>
+    <string name="semana_agrega">Agrega comidas</string>
+    <string name="semana_agregar">Agregar</string>
+    <string name="semana_compra_faltante">Compra faltante: %1$s</string>
+    <string name="semana_sin_compra">No necesitas comprar nada</string>
+    <string name="semana_tiempo_porciones">%1$d min · %2$d porciones</string>
+    <plurals name="semana_comidas">
+        <item quantity="one">%1$d comida</item>
+        <item quantity="other">%1$d comidas</item>
+    </plurals>
+    <string name="semana_compra_estimada">Compra estimada: %1$s</string>
+    <string name="semana_compra_vs_presupuesto">Compra estimada: %1$s / %2$s</string>
+    <string name="semana_presupuesto_dentro">Dentro de tu presupuesto</string>
+    <string name="semana_presupuesto_excedido">Excede tu presupuesto</string>
+    <string name="semana_presupuesto_incierto">Faltan precios: no podemos asegurar que alcance</string>
+    <string name="semana_faltan_precios">Faltan precios de algunos productos</string>
+    <string name="semana_ver_lista">Ver lista de compras</string>
+    <string name="inicio_planear">Planear mi semana</string>
+
+    <!-- Compras -->
+    <string name="compras_otros">Otros</string>
+    <string name="compras_vacia_titulo">Tu lista está vacía</string>
+    <string name="compras_vacia_mensaje">Elige comidas en Mi semana y aquí aparecerá lo que te falta comprar. También puedes agregar productos a mano.</string>
+    <string name="compras_cubierta_titulo">Ya tienes todo lo de tu semana</string>
+    <string name="compras_cubierta_mensaje">Con lo que hay en Mi refri alcanza para las comidas que elegiste.</string>
+    <string name="compras_planear">Planear mi semana</string>
+    <string name="compras_agregar_producto">Agregar producto</string>
+    <string name="compras_cantidad_presentacion">%1$d × %2$s</string>
+    <string name="compras_aprox">%1$s aprox.</string>
+    <string name="compras_para">Para: %1$s</string>
+    <string name="compras_agregado_a_mano">Agregado a mano</string>
+    <string name="compras_comprado">Comprado</string>
+    <string name="compras_corregir">Corregir %1$s</string>
+    <string name="compras_corregir_titulo">Corregir %1$s</string>
+    <string name="compras_cantidad_real">Cantidad que compraste (%1$s)</string>
+    <string name="compras_precio_real">Precio que pagaste (opcional)</string>
+    <string name="compras_precio_real_ayuda">Si lo dejas vacío usamos el precio de referencia.</string>
+    <string name="compras_eliminar">Quitar de la lista</string>
+    <string name="compras_guardar">Guardar</string>
+    <string name="compras_terminar">Terminar compra y actualizar mi refri (%1$d)</string>
+    <string name="compras_confirmar_titulo">¿Terminar compra?</string>
+    <string name="compras_confirmar_mensaje">Esto se agregará a Mi refri:</string>
+    <string name="compras_confirmar_pendientes">Lo que no marcaste se queda en la lista.</string>
+    <string name="compras_confirmar_renglon">%1$s: +%2$s</string>
+    <string name="compras_confirmar_accion">Agregar a mi refri</string>
+    <plurals name="compras_incorporados">
+        <item quantity="one">Agregamos %1$d producto a tu refri</item>
+        <item quantity="other">Agregamos %1$d productos a tu refri</item>
+    </plurals>
+    <string name="compras_error">No se pudo guardar. Intenta de nuevo.</string>
+    <string name="compras_agregar_titulo">Agregar a la lista</string>
+    <string name="compras_precio_opcional">Precio (opcional)</string>
+    <string name="compras_precio_opcional_ayuda">Si lo dejas vacío usamos el precio de referencia, cuando lo hay.</string>
+</resources>
