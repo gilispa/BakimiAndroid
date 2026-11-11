@@ -15,37 +15,37 @@
             "notNull": true
           },
           {
-            "fieldPath": "nombre",
+            "fieldPath": "name",
             "columnName": "nombre",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "cantidad",
+            "fieldPath": "quantity",
             "columnName": "cantidad",
             "affinity": "REAL",
             "notNull": true
           },
           {
-            "fieldPath": "unidad",
+            "fieldPath": "unit",
             "columnName": "unidad",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "ubicacion",
+            "fieldPath": "location",
             "columnName": "ubicacion",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "caducidadDiaEpoch",
+            "fieldPath": "expiryEpochDay",
             "columnName": "caducidad_dia_epoch",
             "affinity": "INTEGER",
             "notNull": false
           },
           {
-            "fieldPath": "ingredienteId",
+            "fieldPath": "ingredientId",
             "columnName": "ingrediente_id",
             "affinity": "TEXT",
             "notNull": false
@@ -71,13 +71,13 @@
             "notNull": true
           },
           {
-            "fieldPath": "personas",
+            "fieldPath": "people",
             "columnName": "personas",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "presupuesto",
+            "fieldPath": "budget",
             "columnName": "presupuesto",
             "affinity": "REAL",
             "notNull": false
@@ -97,19 +97,19 @@
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`receta_id` TEXT NOT NULL, `porciones` INTEGER NOT NULL, `agregada_en` INTEGER NOT NULL, PRIMARY KEY(`receta_id`))",
         "fields": [
           {
-            "fieldPath": "recetaId",
+            "fieldPath": "recipeId",
             "columnName": "receta_id",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "porciones",
+            "fieldPath": "servings",
             "columnName": "porciones",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "agregadaEn",
+            "fieldPath": "addedAt",
             "columnName": "agregada_en",
             "affinity": "INTEGER",
             "notNull": true
@@ -129,25 +129,25 @@
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ingrediente_id` TEXT NOT NULL, `comprado` INTEGER NOT NULL, `cantidad_real` REAL, `precio_real` REAL, PRIMARY KEY(`ingrediente_id`))",
         "fields": [
           {
-            "fieldPath": "ingredienteId",
+            "fieldPath": "ingredientId",
             "columnName": "ingrediente_id",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "comprado",
+            "fieldPath": "purchased",
             "columnName": "comprado",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "cantidadReal",
+            "fieldPath": "actualQuantity",
             "columnName": "cantidad_real",
             "affinity": "REAL",
             "notNull": false
           },
           {
-            "fieldPath": "precioReal",
+            "fieldPath": "actualPrice",
             "columnName": "precio_real",
             "affinity": "REAL",
             "notNull": false
@@ -173,37 +173,37 @@
             "notNull": true
           },
           {
-            "fieldPath": "ingredienteId",
+            "fieldPath": "ingredientId",
             "columnName": "ingrediente_id",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "nombre",
+            "fieldPath": "name",
             "columnName": "nombre",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "cantidad",
+            "fieldPath": "quantity",
             "columnName": "cantidad",
             "affinity": "REAL",
             "notNull": true
           },
           {
-            "fieldPath": "unidad",
+            "fieldPath": "unit",
             "columnName": "unidad",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "precio",
+            "fieldPath": "price",
             "columnName": "precio",
             "affinity": "REAL",
             "notNull": false
           },
           {
-            "fieldPath": "comprado",
+            "fieldPath": "purchased",
             "columnName": "comprado",
             "affinity": "INTEGER",
             "notNull": true
@@ -229,19 +229,19 @@
             "notNull": true
           },
           {
-            "fieldPath": "recetaId",
+            "fieldPath": "recipeId",
             "columnName": "receta_id",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "porciones",
+            "fieldPath": "servings",
             "columnName": "porciones",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "fechaMillis",
+            "fieldPath": "dateMillis",
             "columnName": "fecha_millis",
             "affinity": "INTEGER",
             "notNull": true

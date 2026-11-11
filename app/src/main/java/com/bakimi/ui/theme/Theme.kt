@@ -8,16 +8,16 @@ import androidx.compose.ui.graphics.Color
 
 private val BakimiColorScheme = lightColorScheme(
     primary = Coral,
-    onPrimary = Berenjena,
-    secondary = VerdeSalvia,
-    onSecondary = Berenjena,
-    tertiary = AmarilloMantequilla,
-    onTertiary = Berenjena,
-    background = Crema,
-    onBackground = Berenjena,
-    surface = BlancoCalido,
-    onSurface = Berenjena,
-    error = CoralProfundo,
+    onPrimary = Eggplant,
+    secondary = SageGreen,
+    onSecondary = Eggplant,
+    tertiary = ButterYellow,
+    onTertiary = Eggplant,
+    background = Cream,
+    onBackground = Eggplant,
+    surface = WarmWhite,
+    onSurface = Eggplant,
+    error = DeepCoral,
     onError = Color.White,
 )
 
@@ -25,7 +25,7 @@ private val BakimiColorScheme = lightColorScheme(
 fun BakimiTheme(content: @Composable () -> Unit) {
     MaterialTheme(
         colorScheme = BakimiColorScheme,
-        // Tipografía por defecto de Material 3; la fuente Nunito se agrega después.
+        // Default Material 3 typography; the Nunito font is added later.
         typography = Typography(),
         content = content,
     )

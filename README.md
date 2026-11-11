@@ -43,7 +43,14 @@ Bakimi es una app Android que ayuda a organizar la alimentación y las compras d
 | --- | --- |
 | `:domain` | Inventario, catálogo de ingredientes (búsqueda, sinónimos, equivalencias), evaluación de recetas, plan semanal, lista de compras, presupuesto y Modo Cocina. Es donde están casi todas las pruebas. |
 | `:data` | Entidades, DAOs y repositorios de Room; catálogo de ingredientes con precios de referencia; catálogo de recetas. El esquema de la base se exporta a `data/schemas/`. |
-| `:app` | Pantallas, ViewModels, tema y navegación. Todos los textos están en `app/src/main/res/values/strings.xml`. |
+| `:app` | Pantallas, ViewModels, tema y navegación. Todos los textos visibles están en `app/src/main/res/values/strings.xml`. |
+
+### Idiomas
+
+- **Código en inglés:** paquetes, clases, funciones, comentarios y pruebas.
+- **Interfaz en español:** todos los textos visibles están en `strings.xml`; otros idiomas se agregan con `values-<idioma>/strings.xml`.
+- **Contenido en español:** nombres de ingredientes, sinónimos y pasos de las recetas son datos del catálogo.
+- **Base de datos:** las tablas, columnas y códigos guardados (`"GRAMO"`, `"REFRIGERADOR"`) conservan sus nombres originales en español para que las bases existentes sigan funcionando sin migración. La correspondencia está en `data/src/main/java/com/bakimi/data/StorageCodes.kt` y en los `@ColumnInfo` de las entidades.
 
 ## Cómo ejecutarlo
 
@@ -75,10 +82,10 @@ Desde la terminal:
 
 ## Contenido y datos de referencia
 
-- **Recetas:** `data/src/main/java/com/bakimi/data/recetas/CatalogoRecetasLocal.kt`. Las imágenes y los videos de los pasos son opcionales; sin ellos, el Modo Cocina muestra solo el texto.
-- **Ingredientes:** `data/src/main/java/com/bakimi/data/ingredientes/CatalogoIngredientes.kt`, con sinónimos (solo del mismo producto, nunca sustitutos), categoría, unidad y ubicación sugeridas.
-- **Peso por pieza** (`GRAMOS_POR_PIEZA`): valores de referencia para convertir entre piezas y peso. Las conversiones se muestran como aproximadas.
-- **Precios** (`INFO_COMPRA`): **precios de referencia aproximados en MXN, sin fuente verificada** (país, moneda y fuente de precios siguen pendientes). La app los marca como "aprox." y los fecha en noviembre de 2026.
+- **Recetas:** `data/src/main/java/com/bakimi/data/recipes/LocalRecipeCatalog.kt`. Las imágenes y los videos de los pasos son opcionales; sin ellos, el Modo Cocina muestra solo el texto.
+- **Ingredientes:** `data/src/main/java/com/bakimi/data/ingredients/IngredientCatalog.kt`, con sinónimos (solo del mismo producto, nunca sustitutos), categoría, unidad y ubicación sugeridas.
+- **Peso por pieza** (`GRAMS_PER_PIECE`): valores de referencia para convertir entre piezas y peso. Las conversiones se muestran como aproximadas.
+- **Precios** (`PURCHASE_INFO`): **precios de referencia aproximados en MXN, sin fuente verificada** (país, moneda y fuente de precios siguen pendientes). La app los marca como "aprox." y los fecha en noviembre de 2026.
 
 ## Imágenes de los pasos (Modo Cocina)
 
@@ -86,7 +93,7 @@ Las ilustraciones de los pasos están en `app/src/main/assets/pasos/<receta>_<n>
 
 ## Fotos de las recetas
 
-Las fotos vienen de [Unsplash](https://unsplash.com) bajo la [licencia de Unsplash](https://unsplash.com/license) y están en `app/src/main/res/drawable-nodpi/receta_<id>.jpg` (1080×720). El crédito de cada una aparece en el detalle de la receta.
+Las fotos vienen de [Unsplash](https://unsplash.com) bajo la [licencia de Unsplash](https://unsplash.com/license) y están en `app/src/main/res/drawable-nodpi/recipe_<id>.jpg` (1080×720). El crédito de cada una aparece en el detalle de la receta.
 
 | Receta | Foto | Autor |
 | --- | --- | --- |

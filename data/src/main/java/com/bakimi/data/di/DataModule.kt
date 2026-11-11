@@ -3,27 +3,27 @@ package com.bakimi.data.di
 import android.content.Context
 import androidx.room.Room
 import com.bakimi.data.BakimiDatabase
-import com.bakimi.data.MIGRACION_1_2
-import com.bakimi.data.MIGRACION_2_3
-import com.bakimi.data.MIGRACION_3_4
-import com.bakimi.data.cocina.PreparacionRepositoryRoom
-import com.bakimi.data.compras.ComprasDao
-import com.bakimi.data.compras.ComprasRepositoryRoom
-import com.bakimi.data.compras.PlanDao
-import com.bakimi.data.compras.PlanRepositoryRoom
-import com.bakimi.data.ingredientes.CatalogoIngredientesLocal
-import com.bakimi.data.inventario.InventarioDao
-import com.bakimi.data.inventario.InventarioRepositoryRoom
-import com.bakimi.data.recetas.CatalogoRecetasLocal
-import com.bakimi.domain.cocina.GestorCocina
-import com.bakimi.domain.cocina.PreparacionRepository
-import com.bakimi.domain.compras.ComprasRepository
-import com.bakimi.domain.compras.GestorCompras
-import com.bakimi.domain.compras.PlanRepository
-import com.bakimi.domain.ingredientes.IngredienteRepository
-import com.bakimi.domain.inventario.GestorInventario
-import com.bakimi.domain.inventario.InventarioRepository
-import com.bakimi.domain.recetas.RecetaRepository
+import com.bakimi.data.MIGRATION_1_2
+import com.bakimi.data.MIGRATION_2_3
+import com.bakimi.data.MIGRATION_3_4
+import com.bakimi.data.cooking.RoomPreparationRepository
+import com.bakimi.data.shopping.ShoppingDao
+import com.bakimi.data.shopping.RoomShoppingRepository
+import com.bakimi.data.shopping.PlanDao
+import com.bakimi.data.shopping.RoomPlanRepository
+import com.bakimi.data.ingredients.LocalIngredientCatalog
+import com.bakimi.data.inventory.InventoryDao
+import com.bakimi.data.inventory.RoomInventoryRepository
+import com.bakimi.data.recipes.LocalRecipeCatalog
+import com.bakimi.domain.cooking.CookingManager
+import com.bakimi.domain.cooking.PreparationRepository
+import com.bakimi.domain.shopping.ShoppingRepository
+import com.bakimi.domain.shopping.ShoppingManager
+import com.bakimi.domain.shopping.PlanRepository
+import com.bakimi.domain.ingredients.IngredientRepository
+import com.bakimi.domain.inventory.InventoryManager
+import com.bakimi.domain.inventory.InventoryRepository
+import com.bakimi.domain.recipes.RecipeRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -38,27 +38,27 @@ abstract class DataModule {
 
     @Binds
     @Singleton
-    abstract fun bindInventarioRepository(impl: InventarioRepositoryRoom): InventarioRepository
+    abstract fun bindInventoryRepository(impl: RoomInventoryRepository): InventoryRepository
 
     @Binds
     @Singleton
-    abstract fun bindRecetaRepository(impl: CatalogoRecetasLocal): RecetaRepository
+    abstract fun bindRecipeRepository(impl: LocalRecipeCatalog): RecipeRepository
 
     @Binds
     @Singleton
-    abstract fun bindIngredienteRepository(impl: CatalogoIngredientesLocal): IngredienteRepository
+    abstract fun bindIngredientRepository(impl: LocalIngredientCatalog): IngredientRepository
 
     @Binds
     @Singleton
-    abstract fun bindPlanRepository(impl: PlanRepositoryRoom): PlanRepository
+    abstract fun bindPlanRepository(impl: RoomPlanRepository): PlanRepository
 
     @Binds
     @Singleton
-    abstract fun bindComprasRepository(impl: ComprasRepositoryRoom): ComprasRepository
+    abstract fun bindShoppingRepository(impl: RoomShoppingRepository): ShoppingRepository
 
     @Binds
     @Singleton
-    abstract fun bindPreparacionRepository(impl: PreparacionRepositoryRoom): PreparacionRepository
+    abstract fun bindPreparationRepository(impl: RoomPreparationRepository): PreparationRepository
 
     companion object {
 
@@ -66,38 +66,38 @@ abstract class DataModule {
         @Singleton
         fun provideDatabase(@ApplicationContext context: Context): BakimiDatabase =
             Room.databaseBuilder(context, BakimiDatabase::class.java, "bakimi.db")
-                .addMigrations(MIGRACION_1_2, MIGRACION_2_3, MIGRACION_3_4)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
                 .build()
 
         @Provides
-        fun provideInventarioDao(db: BakimiDatabase): InventarioDao = db.inventarioDao()
+        fun provideInventoryDao(db: BakimiDatabase): InventoryDao = db.inventoryDao()
 
         @Provides
         fun providePlanDao(db: BakimiDatabase): PlanDao = db.planDao()
 
         @Provides
-        fun provideComprasDao(db: BakimiDatabase): ComprasDao = db.comprasDao()
+        fun provideShoppingDao(db: BakimiDatabase): ShoppingDao = db.shoppingDao()
 
-        /** Una sola instancia para que su cerrojo proteja todas las pantallas a la vez. */
+        /** A single instance so its lock protects every screen at once. */
         @Provides
         @Singleton
-        fun provideGestorInventario(repositorio: InventarioRepository): GestorInventario =
-            GestorInventario(repositorio)
+        fun provideInventoryManager(repository: InventoryRepository): InventoryManager =
+            InventoryManager(repository)
 
         @Provides
         @Singleton
-        fun provideGestorCocina(inventario: InventarioRepository, preparaciones: PreparacionRepository): GestorCocina =
-            GestorCocina(inventario, preparaciones)
+        fun provideCookingManager(inventory: InventoryRepository, preparations: PreparationRepository): CookingManager =
+            CookingManager(inventory, preparations)
 
-        /** Una sola instancia para que una compra no se registre dos veces desde dos pantallas. */
+        /** A single instance so a purchase is never registered twice from two screens. */
         @Provides
         @Singleton
-        fun provideGestorCompras(
+        fun provideShoppingManager(
             plan: PlanRepository,
-            compras: ComprasRepository,
-            recetas: RecetaRepository,
-            ingredientes: IngredienteRepository,
-            inventario: InventarioRepository,
-        ): GestorCompras = GestorCompras(plan, compras, recetas, ingredientes, inventario)
+            shopping: ShoppingRepository,
+            recipes: RecipeRepository,
+            ingredients: IngredientRepository,
+            inventory: InventoryRepository,
+        ): ShoppingManager = ShoppingManager(plan, shopping, recipes, ingredients, inventory)
     }
 }

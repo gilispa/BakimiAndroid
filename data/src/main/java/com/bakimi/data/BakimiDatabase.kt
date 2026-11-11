@@ -4,44 +4,44 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.bakimi.data.cocina.PreparacionDao
-import com.bakimi.data.cocina.PreparacionEntity
-import com.bakimi.data.compras.ArticuloManualEntity
-import com.bakimi.data.compras.ComprasDao
-import com.bakimi.data.compras.MarcaCompraEntity
-import com.bakimi.data.compras.PlanConfigEntity
-import com.bakimi.data.compras.PlanDao
-import com.bakimi.data.compras.PlanRecetaEntity
-import com.bakimi.data.inventario.InventarioDao
-import com.bakimi.data.inventario.InventarioEntity
+import com.bakimi.data.cooking.PreparationDao
+import com.bakimi.data.cooking.PreparationEntity
+import com.bakimi.data.shopping.ManualItemEntity
+import com.bakimi.data.shopping.ShoppingDao
+import com.bakimi.data.shopping.PurchaseMarkEntity
+import com.bakimi.data.shopping.PlanSettingsEntity
+import com.bakimi.data.shopping.PlanDao
+import com.bakimi.data.shopping.PlanRecipeEntity
+import com.bakimi.data.inventory.InventoryDao
+import com.bakimi.data.inventory.InventoryEntity
 
 /**
- * Base de datos local de Bakimi. El esquema se exporta a data/schemas para escribir
- * migraciones cuando cambie; nunca se usa la migración destructiva.
+ * Bakimi's local database. The schema is exported to data/schemas to write migrations when it
+ * changes; destructive migration is never used.
  */
 @Database(
     entities = [
-        InventarioEntity::class,
-        PlanConfigEntity::class,
-        PlanRecetaEntity::class,
-        MarcaCompraEntity::class,
-        ArticuloManualEntity::class,
-        PreparacionEntity::class,
+        InventoryEntity::class,
+        PlanSettingsEntity::class,
+        PlanRecipeEntity::class,
+        PurchaseMarkEntity::class,
+        ManualItemEntity::class,
+        PreparationEntity::class,
     ],
     version = 4,
     exportSchema = true,
 )
 abstract class BakimiDatabase : RoomDatabase() {
-    abstract fun inventarioDao(): InventarioDao
+    abstract fun inventoryDao(): InventoryDao
     abstract fun planDao(): PlanDao
-    abstract fun comprasDao(): ComprasDao
-    abstract fun preparacionDao(): PreparacionDao
+    abstract fun shoppingDao(): ShoppingDao
+    abstract fun preparationDao(): PreparationDao
 }
 
-/** Versión 4: historial de preparaciones confirmadas en el Modo Cocina. */
-val MIGRACION_3_4 = object : Migration(3, 4) {
+/** Version 4: history of preparations confirmed in Cooking Mode. */
+val MIGRATION_3_4 = object : Migration(3, 4) {
     override fun migrate(db: SupportSQLiteDatabase) {
-        // Mismo SQL que Room exporta en data/schemas/.../4.json.
+        // Same SQL that Room exports in data/schemas/.../4.json.
         db.execSQL(
             "CREATE TABLE IF NOT EXISTS `preparacion` (`id` TEXT NOT NULL, `receta_id` TEXT NOT NULL, " +
                 "`porciones` INTEGER NOT NULL, `fecha_millis` INTEGER NOT NULL, PRIMARY KEY(`id`))",
@@ -50,19 +50,19 @@ val MIGRACION_3_4 = object : Migration(3, 4) {
 }
 
 /**
- * Versión 2: vínculo opcional de cada alimento con el catálogo de ingredientes. Los registros
- * existentes quedan sin vínculo y se siguen relacionando con las recetas por su nombre.
+ * Version 2: optional link from each food to the ingredient catalog. Existing records stay
+ * unlinked and keep matching recipes by name.
  */
-val MIGRACION_1_2 = object : Migration(1, 2) {
+val MIGRATION_1_2 = object : Migration(1, 2) {
     override fun migrate(db: SupportSQLiteDatabase) {
         db.execSQL("ALTER TABLE inventario ADD COLUMN ingrediente_id TEXT")
     }
 }
 
-/** Versión 3: plan semanal y lista de compras. Solo agrega tablas; no toca el inventario. */
-val MIGRACION_2_3 = object : Migration(2, 3) {
+/** Version 3: weekly plan and shopping list. Only adds tables; does not touch the inventory. */
+val MIGRATION_2_3 = object : Migration(2, 3) {
     override fun migrate(db: SupportSQLiteDatabase) {
-        // Mismo SQL que Room exporta en data/schemas/.../3.json, para que la validación coincida.
+        // Same SQL that Room exports in data/schemas/.../3.json, so validation matches.
         db.execSQL(
             "CREATE TABLE IF NOT EXISTS `plan_config` (`id` INTEGER NOT NULL, `personas` INTEGER NOT NULL, " +
                 "`presupuesto` REAL, PRIMARY KEY(`id`))",

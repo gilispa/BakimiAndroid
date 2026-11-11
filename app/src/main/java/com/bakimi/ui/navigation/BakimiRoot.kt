@@ -22,54 +22,54 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.bakimi.ui.cocina.ModoCocinaViewModel
-import com.bakimi.ui.cocina.PantallaModoCocina
-import com.bakimi.ui.compras.PantallaAgregarProducto
-import com.bakimi.ui.compras.PantallaCompras
-import com.bakimi.ui.inicio.PantallaInicio
-import com.bakimi.ui.recetas.DetalleRecetaViewModel
-import com.bakimi.ui.recetas.PantallaDetalleReceta
-import com.bakimi.ui.refri.FormularioItemViewModel
-import com.bakimi.ui.refri.PantallaFormularioItem
-import com.bakimi.ui.refri.PantallaRefri
-import com.bakimi.ui.semana.PantallaSemana
+import com.bakimi.ui.cooking.CookingModeViewModel
+import com.bakimi.ui.cooking.CookingModeScreen
+import com.bakimi.ui.shopping.AddProductScreen
+import com.bakimi.ui.shopping.ShoppingScreen
+import com.bakimi.ui.home.HomeScreen
+import com.bakimi.ui.recipes.RecipeDetailViewModel
+import com.bakimi.ui.recipes.RecipeDetailScreen
+import com.bakimi.ui.fridge.ItemFormViewModel
+import com.bakimi.ui.fridge.ItemFormScreen
+import com.bakimi.ui.fridge.FridgeScreen
+import com.bakimi.ui.week.WeekScreen
 
-/** Formulario para agregar (sin id) o editar (con id) un alimento de Mi refri. */
-private const val RUTA_FORMULARIO_ITEM = "refri/item?${FormularioItemViewModel.ARG_ID}={${FormularioItemViewModel.ARG_ID}}"
+/** Form to add (no id) or edit (with id) a food in Mi refri. */
+private const val ROUTE_ITEM_FORM = "fridge/item?${ItemFormViewModel.ARG_ID}={${ItemFormViewModel.ARG_ID}}"
 
-private fun rutaFormularioItem(id: Long? = null): String =
-    if (id == null) "refri/item" else "refri/item?${FormularioItemViewModel.ARG_ID}=$id"
+private fun itemFormRoute(id: Long? = null): String =
+    if (id == null) "fridge/item" else "fridge/item?${ItemFormViewModel.ARG_ID}=$id"
 
-private const val RUTA_DETALLE_RECETA = "receta/{${DetalleRecetaViewModel.ARG_ID}}"
+private const val ROUTE_RECIPE_DETAIL = "recipe/{${RecipeDetailViewModel.ARG_ID}}"
 
-private fun rutaDetalleReceta(id: String): String = "receta/$id"
+private fun recipeDetailRoute(id: String): String = "recipe/$id"
 
-private const val RUTA_AGREGAR_PRODUCTO = "compras/agregar"
+private const val ROUTE_ADD_PRODUCT = "shopping/add"
 
-private const val RUTA_MODO_COCINA =
-    "cocina/{${ModoCocinaViewModel.ARG_RECETA}}/{${ModoCocinaViewModel.ARG_PORCIONES}}"
+private const val ROUTE_COOKING_MODE =
+    "cooking/{${CookingModeViewModel.ARG_RECIPE}}/{${CookingModeViewModel.ARG_SERVINGS}}"
 
-private fun rutaModoCocina(recetaId: String, porciones: Int): String = "cocina/$recetaId/$porciones"
+private fun cookingModeRoute(recipeId: String, servings: Int): String = "cooking/$recipeId/$servings"
 
 @Composable
 fun BakimiRoot() {
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
-    val destinoActual = backStackEntry?.destination
-    // La barra inferior solo aparece en las cuatro secciones principales.
-    val mostrarBarra = destinoActual == null || Destino.entries.any { it.ruta == destinoActual.route }
+    val currentDestination = backStackEntry?.destination
+    // The bottom bar only appears in the four main sections.
+    val showBar = currentDestination == null || Destination.entries.any { it.path == currentDestination.route }
 
     Scaffold(
         bottomBar = {
-            if (mostrarBarra) {
+            if (showBar) {
                 NavigationBar {
-                    Destino.entries.forEach { destino ->
+                    Destination.entries.forEach { destination ->
                         NavigationBarItem(
-                            selected = destinoActual?.hierarchy?.any { it.route == destino.ruta } == true,
-                            onClick = { navController.irASeccion(destino) },
-                            // La etiqueta visible ya nombra el destino; el ícono es decorativo.
-                            icon = { Icon(destino.icono, contentDescription = null) },
-                            label = { Text(stringResource(destino.etiqueta)) },
+                            selected = currentDestination?.hierarchy?.any { it.route == destination.path } == true,
+                            onClick = { navController.goToSection(destination) },
+                            // The visible label already names the destination; the icon is decorative.
+                            icon = { Icon(destination.icon, contentDescription = null) },
+                            label = { Text(stringResource(destination.label)) },
                         )
                     }
                 }
@@ -78,76 +78,76 @@ fun BakimiRoot() {
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = Destino.INICIO.ruta,
+            startDestination = Destination.HOME.path,
             modifier = Modifier
                 .padding(innerPadding)
                 .consumeWindowInsets(innerPadding),
         ) {
-            Destino.entries.forEach { destino ->
-                composable(destino.ruta) {
-                    when (destino) {
-                        Destino.INICIO -> PantallaInicio(
-                            onAbrirReceta = { id -> navController.navigate(rutaDetalleReceta(id)) },
-                            onIrARefri = { navController.irASeccion(Destino.REFRI) },
-                            onPlanear = { navController.irASeccion(Destino.SEMANA) },
+            Destination.entries.forEach { destination ->
+                composable(destination.path) {
+                    when (destination) {
+                        Destination.HOME -> HomeScreen(
+                            onOpenRecipe = { id -> navController.navigate(recipeDetailRoute(id)) },
+                            onGoToFridge = { navController.goToSection(Destination.FRIDGE) },
+                            onPlan = { navController.goToSection(Destination.WEEK) },
                         )
 
-                        Destino.REFRI -> PantallaRefri(
-                            onAgregar = { navController.navigate(rutaFormularioItem()) },
-                            onEditar = { id -> navController.navigate(rutaFormularioItem(id)) },
+                        Destination.FRIDGE -> FridgeScreen(
+                            onAdd = { navController.navigate(itemFormRoute()) },
+                            onEdit = { id -> navController.navigate(itemFormRoute(id)) },
                         )
 
-                        Destino.SEMANA -> PantallaSemana(
-                            onAbrirReceta = { id -> navController.navigate(rutaDetalleReceta(id)) },
-                            onVerLista = { navController.irASeccion(Destino.COMPRAS) },
+                        Destination.WEEK -> WeekScreen(
+                            onOpenRecipe = { id -> navController.navigate(recipeDetailRoute(id)) },
+                            onViewList = { navController.goToSection(Destination.SHOPPING) },
                         )
 
-                        Destino.COMPRAS -> PantallaCompras(
-                            onAgregarProducto = { navController.navigate(RUTA_AGREGAR_PRODUCTO) },
-                            onPlanear = { navController.irASeccion(Destino.SEMANA) },
+                        Destination.SHOPPING -> ShoppingScreen(
+                            onAddProduct = { navController.navigate(ROUTE_ADD_PRODUCT) },
+                            onPlan = { navController.goToSection(Destination.WEEK) },
                         )
                     }
                 }
             }
             composable(
-                route = RUTA_FORMULARIO_ITEM,
+                route = ROUTE_ITEM_FORM,
                 arguments = listOf(
-                    navArgument(FormularioItemViewModel.ARG_ID) {
+                    navArgument(ItemFormViewModel.ARG_ID) {
                         type = NavType.LongType
                         defaultValue = 0L
                     },
                 ),
-            ) { entrada ->
-                PantallaFormularioItem(onTerminar = { navController.volverDesde(entrada) })
+            ) { entry ->
+                ItemFormScreen(onFinish = { navController.navigateBackFrom(entry) })
             }
             composable(
-                route = RUTA_DETALLE_RECETA,
-                arguments = listOf(navArgument(DetalleRecetaViewModel.ARG_ID) { type = NavType.StringType }),
-            ) { entrada ->
-                PantallaDetalleReceta(
-                    onVolver = { navController.volverDesde(entrada) },
-                    onIniciarCocina = { id, porciones -> navController.navigate(rutaModoCocina(id, porciones)) },
+                route = ROUTE_RECIPE_DETAIL,
+                arguments = listOf(navArgument(RecipeDetailViewModel.ARG_ID) { type = NavType.StringType }),
+            ) { entry ->
+                RecipeDetailScreen(
+                    onBack = { navController.navigateBackFrom(entry) },
+                    onStartCooking = { id, servings -> navController.navigate(cookingModeRoute(id, servings)) },
                 )
             }
             composable(
-                route = RUTA_MODO_COCINA,
+                route = ROUTE_COOKING_MODE,
                 arguments = listOf(
-                    navArgument(ModoCocinaViewModel.ARG_RECETA) { type = NavType.StringType },
-                    navArgument(ModoCocinaViewModel.ARG_PORCIONES) { type = NavType.IntType },
+                    navArgument(CookingModeViewModel.ARG_RECIPE) { type = NavType.StringType },
+                    navArgument(CookingModeViewModel.ARG_SERVINGS) { type = NavType.IntType },
                 ),
-            ) { entrada ->
-                PantallaModoCocina(onSalir = { navController.volverDesde(entrada) })
+            ) { entry ->
+                CookingModeScreen(onExit = { navController.navigateBackFrom(entry) })
             }
-            composable(RUTA_AGREGAR_PRODUCTO) { entrada ->
-                PantallaAgregarProducto(onTerminar = { navController.volverDesde(entrada) })
+            composable(ROUTE_ADD_PRODUCT) { entry ->
+                AddProductScreen(onFinish = { navController.navigateBackFrom(entry) })
             }
         }
     }
 }
 
-/** Cambia de sección conservando el estado de cada una, igual que la barra inferior. */
-private fun NavController.irASeccion(destino: Destino) {
-    navigate(destino.ruta) {
+/** Switches section keeping each one's state, like the bottom bar. */
+private fun NavController.goToSection(destination: Destination) {
+    navigate(destination.path) {
         popUpTo(graph.findStartDestination().id) {
             saveState = true
         }
@@ -156,9 +156,9 @@ private fun NavController.irASeccion(destino: Destino) {
     }
 }
 
-/** Regresa solo si la pantalla sigue activa, para que un doble toque no saque al usuario de Mi refri. */
-private fun NavController.volverDesde(entrada: NavBackStackEntry) {
-    if (entrada.lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
+/** Goes back only if the screen is still active, so a double tap does not take the user out of Mi refri. */
+private fun NavController.navigateBackFrom(entry: NavBackStackEntry) {
+    if (entry.lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
         popBackStack()
     }
 }
