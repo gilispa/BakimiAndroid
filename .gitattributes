@@ -1,0 +1,12 @@
+# Normaliza finales de línea en el repositorio.
+* text=auto
+
+# gradlew debe usar LF para ejecutarse en macOS, Linux y GitHub Actions.
+gradlew text eol=lf
+*.bat text eol=crlf
+
+# Binarios
+*.jar binary
+*.png binary
+*.jpg binary
+*.webp binary

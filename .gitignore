@@ -1,0 +1,23 @@
+# Gradle
+.gradle/
+build/
+**/build/
+
+# Kotlin (datos temporales del compilador)
+.kotlin/
+
+# Configuración local (ruta del SDK de cada computadora)
+local.properties
+
+# IDE
+.idea/
+*.iml
+.DS_Store
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Firmas
+*.jks
+*.keystore
+keystore.properties
