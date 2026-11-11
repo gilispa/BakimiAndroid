@@ -17,6 +17,10 @@ captures/
 .externalNativeBuild/
 .cxx/
 
+# Documentos internos (no se publican)
+/Bakimi_documento_producto_v2.md
+/CLAUDE.md
+
 # Firmas
 *.jks
 *.keystore
